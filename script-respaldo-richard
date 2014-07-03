@@ -1,0 +1,10 @@
+#!/bin/bash
+# Script que respalda directorio /var/wwww/debian
+
+fecha=$(date +"%d%m%y-%T")
+
+cp -fR /home/usuario/debian /var/www/respaldo/respaldo$fecha
+
+/etc/init.d/apache2 stop
+/etc/init.d/apache2 start
+echo "Fin de Respaldo"
