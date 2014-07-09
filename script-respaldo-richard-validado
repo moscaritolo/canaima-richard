@@ -1,0 +1,23 @@
+#!/bin/bash
+# Script de respaldo
+
+fecha=$(date +"%d%m%y-%T")
+
+DIRECTORIO_ORIGEN="/home/usuario/"
+DIRECTORIO_DESTINO="/var/www/respaldo/"
+ARCHIVO="debian"
+
+if [ -d ${DIRECTORIO_DESTINO} ]; then
+   if [ -s ${ARCHIVO} ]; then
+      echo "Deteniendo el servicio APACHE"
+      echo "Respaldando $ARCHIVO en $DIRECTORIO_DESTINO"
+      cp -fR $ARCHIVO $DIRECTORIO_DESTINO$fecha
+      echo "Respaldo Concluido ......."
+      echo "Iniciando servicio APACHE"
+   else
+      echo "ERROR... $ARCHIVO, no existe en la ruta: $DIRECTORIO_ORIGEN"
+   fi
+else
+   echo "ERROR... El directorio $DIRECTORIO_ORIGEN, no existe"
+fi
+
